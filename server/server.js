@@ -19,7 +19,11 @@ app.use(function(req, res, next) {
 
 var server = require('http').Server(app);
 var server = app.listen(port, () => console.log(`Server listening on port ${port}!`))
-var io = require('socket.io')(server);
+var io = require('socket.io')(server, {
+    cors: {
+        origin: "http://localhost:3000",
+      }
+});
 
 
 app.get('/', (req, res) => {
