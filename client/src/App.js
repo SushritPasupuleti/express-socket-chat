@@ -27,7 +27,11 @@ function App() {
 
   const socket = socketIOClient(ENDPOINT);
   socket.on("sendMessage", data => {
-    setResponse(data);
+    console.log("Sending Data to Server: ", data)
+  });
+
+  socket.on("recieveMessage", data => {
+    console.log("Messsage from Server: ", data)
   });
   // useEffect(() => {
   // }, []);

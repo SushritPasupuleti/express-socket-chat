@@ -34,8 +34,8 @@ io.on('connection', function (client) {
     console.log("New client connected: ", client.id)
 
     client.on('sendMessage', async function (data) {
-        console.log(data, client.id)
-        io.emit("recieveMessage", "Hi!");
+        console.log("New Message: ", data, " from: ", client.id)
+        // io.emit("recieveMessage", "Hi!");
         io.to(client.id).emit("recieveMessage", "Hi " + client.id)
     })
 
