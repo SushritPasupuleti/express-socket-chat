@@ -17,10 +17,27 @@ app.use(function(req, res, next) {
     next();
   });
 
+var server = require('http').Server(app);
+var server = app.listen(port, () => console.log(`Server listening on port ${port}!`))
+var io = require('socket.io')(server);
+
+
 app.get('/', (req, res) => {
   res.send('Hello There!')
 })
 
-app.listen(port, () => {
-  console.log(`Server listening at http://localhost:${port}`)
-})
+io.on('connection', function (client) {
+    console.log("New client connected: ", client.id)
+
+    client.on('sendMessage', async function (data) {
+        console.log(data, client.id)
+        io.emit("recieveMessage", "Hi!");
+        io.to(client.id).emit("recieveMessage", "Hi " + client.id)
+    })
+
+    client.on('disconnect', function () {
+        console.log('Client Disconnected: ', client.id)
+        //handleDisconnect()
+    })
+
+});
