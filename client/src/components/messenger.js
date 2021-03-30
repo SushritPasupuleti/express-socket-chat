@@ -32,7 +32,7 @@ const WrappedMessenger = (props) => {
     const [message, setMessage] = useState("");
 
     const sendMessage = () => {
-        console.log(props)
+        console.log(props, message)
         props.socket.emit('sendMessage', message);
     }
 
@@ -47,7 +47,7 @@ const WrappedMessenger = (props) => {
                     </SendIcon>
                 </InputAdornment>
             }
-            onChange={setMessage}
+            onChange={(e) => setMessage(e.target.value)}
             />
         </form>
     )
