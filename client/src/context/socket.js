@@ -1,5 +1,13 @@
-import React from 'react'
+import socketIOClient from "socket.io-client";
+const ENDPOINT = "http://localhost:5000";
 
-const SocketContext = React.createContext()
+const socket = socketIOClient(ENDPOINT);
+  socket.on("sendMessage", data => {
+    console.log("Sending Data to Server: ", data)
+  });
 
-export default SocketContext
+  socket.on("recieveMessage", data => {
+    console.log("Messsage from Server: ", data)
+  });
+
+export default socket;

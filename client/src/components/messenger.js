@@ -5,6 +5,7 @@ import Button from '@material-ui/core/Button';
 import InputAdornment from '@material-ui/core/InputAdornment';
 import SendIcon from '@material-ui/icons/Send';
 import SocketContext from '../context/socket';
+import socket from '../context/socket';
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -16,24 +17,13 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Messenger = (props) => {
-    const classes = useStyles();
-
-    return (
-        <SocketContext.Consumer>
-            {socket => <WrappedMessenger {...props} socket={socket}></WrappedMessenger>}
-        </SocketContext.Consumer>
-    );
-}
-
-
-const WrappedMessenger = (props) => {
 
     const classes = useStyles();
     const [message, setMessage] = useState("");
 
     const sendMessage = () => {
         console.log(props, message)
-        props.socket.emit('sendMessage', message);
+        socket.emit('sendMessage', message);
     }
 
     return (

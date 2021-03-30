@@ -25,21 +25,11 @@ function App() {
   const [response, setResponse] = useState("");
   const [message, setMessage] = useState("");
 
-  const socket = socketIOClient(ENDPOINT);
-  socket.on("sendMessage", data => {
-    console.log("Sending Data to Server: ", data)
-  });
-
-  socket.on("recieveMessage", data => {
-    console.log("Messsage from Server: ", data)
-    setResponse(data)
-  });
   // useEffect(() => {
   // }, []);
 
   return (
     <ThemeProvider theme={theme}>
-      <SocketContext.Provider value={socket}>
         <div className="App">
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
@@ -47,7 +37,6 @@ function App() {
             <p>Server Says: {response}</p>
           </header>
         </div>
-      </SocketContext.Provider>
     </ThemeProvider>
   );
 }
