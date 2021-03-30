@@ -32,6 +32,7 @@ function App() {
 
   socket.on("recieveMessage", data => {
     console.log("Messsage from Server: ", data)
+    setResponse(data)
   });
   // useEffect(() => {
   // }, []);
@@ -43,6 +44,7 @@ function App() {
           <header className="App-header">
             <img src={logo} className="App-logo" alt="logo" />
             <Messenger></Messenger>
+            <p>Server Says: {response}</p>
           </header>
         </div>
       </SocketContext.Provider>
